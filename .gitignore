@@ -1,0 +1,10 @@
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
+benchmark/*.exe
+benchmark/roundtrip_benchmark
+.DS_Store
+.idea/
+*.iml

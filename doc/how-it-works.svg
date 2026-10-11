@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="How Aether Thread works: your code submits a task; priority queues dispatch it to a warm worker; the worker writes shared native memory in place; its reply goes to the state stitcher, which applies the result at the start of the next frame, before build.">
+  <title>How Aether Thread works</title>
+  <style>
+    .bg{fill:#fcfcfb}.box{fill:#ffffff;stroke:#c9c8c2}.hot{fill:#eaf2fc;stroke:#2a78d6}
+    .ink{fill:#0b0b0b}.ink2{fill:#52514e}.muted{fill:#8a8984}
+    .arrow{stroke:#52514e;fill:none}.head{fill:#52514e}.slot{fill:#86b6ef}.slotFree{fill:#e3e2dd}
+    .zone{fill:none;stroke:#d9d8d3}
+    @media (prefers-color-scheme: dark){
+      .bg{fill:#1a1a19}.box{fill:#262624;stroke:#4a4a46}.hot{fill:#1d2c40;stroke:#3987e5}
+      .ink{fill:#ffffff}.ink2{fill:#c3c2b7}.muted{fill:#8f8e86}
+      .arrow{stroke:#c3c2b7}.head{fill:#c3c2b7}.slot{fill:#2a78d6}.slotFree{fill:#383835}
+      .zone{stroke:#383835}
+    }
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="head" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="520" rx="20"/>
+
+  <!-- Zones -->
+  <rect class="zone" x="32" y="56" width="356" height="432" rx="16" stroke-width="2" stroke-dasharray="6 6"/>
+  <text class="ink2" x="52" y="88" font-size="15" font-weight="600">UI isolate (main thread)</text>
+  <rect class="zone" x="452" y="56" width="716" height="236" rx="16" stroke-width="2" stroke-dasharray="6 6"/>
+  <text class="ink2" x="472" y="88" font-size="15" font-weight="600">Worker isolates (warm, one per spare core)</text>
+
+  <!-- UI side -->
+  <rect class="box" x="56" y="112" width="308" height="64" rx="12" stroke-width="2"/>
+  <text class="ink" x="210" y="141" font-size="17" font-weight="600" text-anchor="middle">Your code</text>
+  <text class="muted" x="210" y="163" font-size="13" text-anchor="middle">computeAsync · computeMap · computeGrid</text>
+
+  <rect class="box" x="56" y="226" width="308" height="64" rx="12" stroke-width="2"/>
+  <text class="ink" x="210" y="255" font-size="17" font-weight="600" text-anchor="middle">Priority queues</text>
+  <text class="muted" x="210" y="277" font-size="13" text-anchor="middle">high · normal · low, with aging</text>
+
+  <rect class="hot" x="56" y="380" width="308" height="64" rx="12" stroke-width="2"/>
+  <text class="ink" x="210" y="409" font-size="17" font-weight="600" text-anchor="middle">State stitcher</text>
+  <text class="muted" x="210" y="431" font-size="13" text-anchor="middle">applies results before build</text>
+
+  <!-- Workers -->
+  <rect class="box" x="488" y="112" width="200" height="56" rx="12" stroke-width="2"/>
+  <text class="ink" x="588" y="146" font-size="16" font-weight="600" text-anchor="middle">Worker 1</text>
+  <rect class="box" x="488" y="178" width="200" height="56" rx="12" stroke-width="2"/>
+  <text class="ink" x="588" y="212" font-size="16" font-weight="600" text-anchor="middle">Worker 2 … N</text>
+  <text class="muted" x="540" y="266" font-size="13">crash → respawn · timeout → kill</text>
+
+  <!-- Shared memory -->
+  <rect class="box" x="848" y="112" width="296" height="152" rx="12" stroke-width="2"/>
+  <text class="ink" x="996" y="141" font-size="16" font-weight="600" text-anchor="middle">Shared native memory</text>
+  <g class="slot">
+    <rect x="872" y="160" width="56" height="44" rx="6"/><rect x="936" y="160" width="56" height="44" rx="6"/>
+  </g>
+  <g class="slotFree">
+    <rect x="1000" y="160" width="56" height="44" rx="6"/><rect x="1064" y="160" width="56" height="44" rx="6"/>
+  </g>
+  <text class="muted" x="996" y="236" font-size="13" text-anchor="middle">cache-line-aligned slots, one writer each</text>
+
+  <!-- Frame timeline -->
+  <rect class="box" x="452" y="340" width="716" height="148" rx="16" stroke-width="2"/>
+  <text class="ink2" x="472" y="370" font-size="15" font-weight="600">One frame</text>
+  <rect class="hot" x="472" y="388" width="150" height="40" rx="8" stroke-width="2"/>
+  <text class="ink" x="547" y="413" font-size="14" text-anchor="middle">apply results</text>
+  <rect class="box" x="634" y="388" width="110" height="40" rx="8" stroke-width="2"/>
+  <text class="ink" x="689" y="413" font-size="14" text-anchor="middle">build</text>
+  <rect class="box" x="756" y="388" width="110" height="40" rx="8" stroke-width="2"/>
+  <text class="ink" x="811" y="413" font-size="14" text-anchor="middle">layout</text>
+  <rect class="box" x="878" y="388" width="110" height="40" rx="8" stroke-width="2"/>
+  <text class="ink" x="933" y="413" font-size="14" text-anchor="middle">paint</text>
+  <rect class="box" x="1000" y="388" width="148" height="40" rx="8" stroke-width="2"/>
+  <text class="ink" x="1074" y="413" font-size="14" text-anchor="middle">recycle slots</text>
+  <text class="muted" x="472" y="462" font-size="13">Widgets never see half-written data: updates land before build, slots are reused after paint.</text>
+
+  <!-- Arrows -->
+  <line class="arrow" x1="210" y1="176" x2="210" y2="222" stroke-width="2" marker-end="url(#a)"/>
+  <text class="ink2" x="222" y="204" font-size="13">submit</text>
+
+  <path class="arrow" d="M364,258 C420,258 424,140 484,140" stroke-width="2" marker-end="url(#a)"/>
+  <text class="ink2" x="394" y="138" font-size="13">dispatch</text>
+
+  <line class="arrow" x1="688" y1="140" x2="844" y2="168" stroke-width="2" marker-end="url(#a)"/>
+  <text class="ink2" x="700" y="200" font-size="13">writes in place,</text>
+  <text class="ink2" x="700" y="217" font-size="13">no copy</text>
+
+  <path class="arrow" d="M520,234 V312 H300 V376" stroke-width="2" marker-end="url(#a)"/>
+  <text class="ink2" x="396" y="330" font-size="13">reply (slot index)</text>
+
+  <line class="arrow" x1="364" y1="408" x2="468" y2="408" stroke-width="2" marker-end="url(#a)"/>
+  <text class="ink2" x="378" y="398" font-size="13">next frame</text>
+</svg>

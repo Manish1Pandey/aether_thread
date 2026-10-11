@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 570" role="img" aria-label="Speed-up of Aether Thread over compute (Isolate.run), AOT on an 11-core Apple Silicon Mac: small task 6.7 times, 2,000-task burst 2.7 times, 4 MB kernel in place 1.7 times, 4 MB kernel with SIMD 7.2 times, parallel map 5.8 times, 32 MB one-off result about equal.">
+  <title>Aether Thread vs compute()</title>
+  <style>
+    .bg{fill:#fcfcfb}.ink{fill:#0b0b0b}.ink2{fill:#52514e}.muted{fill:#8a8984}
+    .bar{fill:#2a78d6}.grid{stroke:#e8e7e3}.axis{stroke:#b5b4ae}.ref{stroke:#52514e}
+    @media (prefers-color-scheme: dark){
+      .bg{fill:#1a1a19}.ink{fill:#ffffff}.ink2{fill:#c3c2b7}.muted{fill:#8f8e86}
+      .bar{fill:#3987e5}.grid{stroke:#2e2e2c}.axis{stroke:#55554f}.ref{stroke:#c3c2b7}
+    }
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect class="bg" x="0" y="0" width="1200" height="570" rx="20"/>
+  <text class="ink" x="48" y="64" font-size="26" font-weight="700">Speed-up over Flutter's compute()</text>
+  <text class="ink2" x="48" y="94" font-size="15">p50 time, Isolate.run ÷ Aether · AOT build, 11-core Apple Silicon · lower of two runs · higher is better</text>
+  <line class="grid" x1="540" y1="128" x2="540" y2="436" stroke-width="1"/>
+  <text class="muted" x="540" y="458" font-size="13" text-anchor="middle">2×</text>
+  <line class="grid" x1="700" y1="128" x2="700" y2="436" stroke-width="1"/>
+  <text class="muted" x="700" y="458" font-size="13" text-anchor="middle">4×</text>
+  <line class="grid" x1="860" y1="128" x2="860" y2="436" stroke-width="1"/>
+  <text class="muted" x="860" y="458" font-size="13" text-anchor="middle">6×</text>
+  <line class="grid" x1="1020" y1="128" x2="1020" y2="436" stroke-width="1"/>
+  <text class="muted" x="1020" y="458" font-size="13" text-anchor="middle">8×</text>
+  <line class="axis" x1="380" y1="128" x2="380" y2="436" stroke-width="1.5"/>
+  <text class="muted" x="380" y="458" font-size="13" text-anchor="middle">0</text>
+  <text class="ink" x="364" y="149" font-size="15" text-anchor="end">Small task, one at a time</text>
+  <path class="bar" d="M380,132 h532.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-532.0 z"/>
+  <text class="ink" x="926" y="149" font-size="15" font-weight="700">6.7×</text>
+  <text class="muted" x="974" y="149" font-size="13">2–3 µs vs 19–20 µs</text>
+  <text class="ink" x="364" y="199" font-size="15" text-anchor="end">2,000 small tasks at once</text>
+  <path class="bar" d="M380,182 h212.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-212.0 z"/>
+  <text class="ink" x="606" y="199" font-size="15" font-weight="700">2.7×</text>
+  <text class="muted" x="654" y="199" font-size="13">11–12 ms vs 32–34 ms</text>
+  <text class="ink" x="364" y="249" font-size="15" text-anchor="end">4 MB kernel, in place</text>
+  <path class="bar" d="M380,232 h132.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-132.0 z"/>
+  <text class="ink" x="526" y="249" font-size="15" font-weight="700">1.7×</text>
+  <text class="muted" x="574" y="249" font-size="13">0.8–0.9 ms vs 1.4–1.5 ms</text>
+  <text class="ink" x="364" y="299" font-size="15" text-anchor="end">4 MB kernel, SIMD</text>
+  <path class="bar" d="M380,282 h572.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-572.0 z"/>
+  <text class="ink" x="966" y="299" font-size="15" font-weight="700">7.2×</text>
+  <text class="muted" x="1014" y="299" font-size="13">0.2 ms vs 1.4–1.5 ms</text>
+  <text class="ink" x="364" y="349" font-size="15" text-anchor="end">Parallel map, 200k items</text>
+  <path class="bar" d="M380,332 h460.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-460.0 z"/>
+  <text class="ink" x="854" y="349" font-size="15" font-weight="700">5.8×</text>
+  <text class="muted" x="902" y="349" font-size="13">78–86 ms vs 496–500 ms</text>
+  <text class="ink" x="364" y="399" font-size="15" text-anchor="end">32 MB one-off result</text>
+  <path class="bar" d="M380,382 h76.0 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-76.0 z"/>
+  <text class="ink" x="470" y="399" font-size="15" font-weight="700">≈1×</text>
+  <text class="muted" x="510" y="399" font-size="13">1.9 ms vs 1.8–2.2 ms · a tie</text>
+  <line class="ref" x1="460" y1="120" x2="460" y2="436" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="ink2" x="466" y="116" font-size="12">compute() = 1×</text>
+  <text class="ink2" x="48" y="494" font-size="14">UI freeze during the 2,000-task burst: <tspan font-weight="700">~2 ms</tspan> with Aether vs <tspan font-weight="700">15–16 ms</tspan> with compute().</text>
+  <text class="muted" x="48" y="518" font-size="13">On the web there are no threads for Dart closures, so Aether runs tasks on the UI thread there: same API, no speed-up.</text>
+</svg>

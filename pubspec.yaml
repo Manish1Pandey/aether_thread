@@ -1,0 +1,31 @@
+name: aether_thread
+description: Warm worker-isolate pool for Flutter with shared native memory, frame-aligned results and typed failures. No isolate or port code in your app.
+version: 0.1.0
+repository: https://github.com/Manish1Pandey/aether_thread
+issue_tracker: https://github.com/Manish1Pandey/aether_thread/issues
+topics:
+  - isolate
+  - concurrency
+  - ffi
+  - performance
+  - threading
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.41.0"
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - name: AOT benchmark
+        run: |
+          dart compile exe benchmark/roundtrip_benchmark.dart -o bench.exe
+          ./bench.exe
+        shell: bash
+
+  web:
+    name: test (web, chrome)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter test --platform chrome
+      - name: Build example for web (JS and Wasm)
+        working-directory: example
+        run: |
+          flutter pub get
+          flutter build web
+          flutter build web --wasm
