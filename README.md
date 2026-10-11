@@ -361,6 +361,12 @@ back with the reply (or with the worker's confirmed exit), so no locks or
 atomics are needed. `SPEC.md` has the full functional specification and
 data-flow diagram.
 
+## Links
+
+- **Documentation:** [flutterdev.in/packages/aether_thread](https://flutterdev.in/packages/aether_thread/)
+- **More Flutter packages:** [flutterdev.in](https://flutterdev.in)
+- **Learn data structures & algorithms in Dart:** [Algoistan](https://algoistan.flutterdev.in)
+
 ## License
 
 MIT
