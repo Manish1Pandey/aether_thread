@@ -1,6 +1,6 @@
 name: aether_thread
 description: Warm worker-isolate pool for Flutter with shared native memory, frame-aligned results and typed failures. No isolate or port code in your app.
-version: 0.1.1
+version: 0.1.2
 homepage: https://flutterdev.in/packages/aether_thread/
 repository: https://github.com/Manish1Pandey/aether_thread
 issue_tracker: https://github.com/Manish1Pandey/aether_thread/issues
@@ -10,6 +10,10 @@ topics:
   - ffi
   - performance
   - threading
+
+screenshots:
+  - description: "Animated: 100k particles stepped on a worker isolate stay at 118 fps while prime counting, a parallel map and a 64 MB result run in the pool."
+    path: screenshots/demo.gif
 
 environment:
   sdk: ^3.11.0

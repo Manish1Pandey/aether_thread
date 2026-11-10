@@ -1,3 +1,7 @@
+## 0.1.2
+
+- README: demo GIF.
+
 ## 0.1.1
 
 - Homepage and README now link to the package's documentation page on flutterdev.in. No code changes.

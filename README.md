@@ -18,6 +18,10 @@ final primes = await AetherConcurrentRunner.computeAsync(
 );
 ```
 
+![100k particles keep moving at about 118 fps while the example app counts primes, runs a parallel map and hands back a 64 MB result on worker isolates](screenshots/demo.gif)
+
+*The example app on macOS: a worker isolate steps 100k particles in shared native memory while the UI thread only draws them. Count primes, Progress, Parallel map and 64 MB result each run in the pool, and the frame stats stay at 0 frames over the 8.3 ms budget.*
+
 - **Zero dependencies.** Only the Flutter SDK. Native memory is allocated
   through `dart:ffi` directly.
 - **Warm workers.** Started once and respawned automatically if one crashes
